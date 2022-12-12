@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import AuthInput from '../components/auth/AuthInput'
 import { UserParam, validationParam } from '../../lib/interface/userInterface'
 import getValidation from '../../lib/utils/getValidation'
+import { signUpAPI } from '../../lib/api/auth/signUp'
 
 const SignIn = () => {
   const navigate = useNavigate()
@@ -27,9 +28,15 @@ const SignIn = () => {
     [user, validation],
   )
 
-  const onClickSignUp = () => {
-    navigate('/')
-  }
+  const onClickSignUp = useCallback(async () => {
+    try {
+      const userData = { email: user.email, password: user.password }
+      await signUpAPI(userData)
+      navigate('/')
+    } catch {
+      alert('존재하는 이메일 입니다.')
+    }
+  }, [user, validation])
 
   const isValidation = useMemo(
     () => !(validation.email && validation.password && validation.passwordCheck),

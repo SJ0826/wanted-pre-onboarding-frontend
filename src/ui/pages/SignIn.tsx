@@ -1,9 +1,10 @@
-import { ChangeEvent, useCallback, useMemo, useState } from 'react'
+import { ChangeEvent, memo, useCallback, useEffect, useMemo, useState } from 'react'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 import AuthInput from '../components/auth/AuthInput'
 import { UserParam, validationParam } from '../../lib/interface/userInterface'
 import getValidation from '../../lib/utils/getValidation'
+import { signInAPI } from '../../lib/api/auth/signIn'
 
 const SignIn = () => {
   const navigate = useNavigate()
@@ -23,9 +24,17 @@ const SignIn = () => {
     [user.email, user.password],
   )
 
-  const onClickSignIn = () => {
-    navigate('./todo')
-  }
+  const onClickSignIn = useCallback(async () => {
+    try {
+      const userToken = await signInAPI(user)
+      localStorage.setItem('token', userToken.data.access_token)
+      console.log(localStorage)
+      alert('로그인 되었습니다')
+      navigate('./todo')
+    } catch {
+      alert('로그인 할 수 없습니다.')
+    }
+  }, [user])
 
   const onClickSignUp = useCallback(() => navigate('./signup'), [])
 
@@ -33,6 +42,10 @@ const SignIn = () => {
     () => !(validation.email && validation.password),
     [validation.email, validation.password],
   )
+
+  useEffect(() => {
+    if (localStorage.getItem('token')) navigate('/todo')
+  })
 
   return (
     <Container>
@@ -49,7 +62,7 @@ const SignIn = () => {
   )
 }
 
-export default SignIn
+export default memo(SignIn)
 
 const Container = styled.div`
   display: flex;
