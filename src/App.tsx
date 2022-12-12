@@ -1,5 +1,5 @@
 function App() {
-  return <div>App</div>;
+  return <div>eslint test</div>
 }
 
-export default App;
+export default App
