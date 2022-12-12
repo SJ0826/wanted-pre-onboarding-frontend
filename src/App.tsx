@@ -1,5 +1,12 @@
+import Layout from './ui/components/layout/Layout'
+import GlobalStyles from './ui/core/GlobalStyles'
+
 function App() {
-  return <div>eslint test</div>
+  return (
+    <Layout>
+      <GlobalStyles />
+    </Layout>
+  )
 }
 
 export default App
