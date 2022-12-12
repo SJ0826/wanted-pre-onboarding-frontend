@@ -1,19 +1,47 @@
-import { useCallback } from 'react'
+import { ChangeEvent, useCallback, useMemo, useState } from 'react'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 import AuthInput from '../components/auth/AuthInput'
+import { UserParam, validationParam } from '../../lib/interface/userInterface'
+import getValidation from '../../lib/utils/getValidation'
 
 const SignIn = () => {
   const navigate = useNavigate()
+  const [user, setUser] = useState<Omit<UserParam, 'passwordCheck'>>({ email: '', password: '' })
+  const [validation, setValidation] = useState<Omit<validationParam, 'passwordCheck'>>({
+    email: false,
+    password: false,
+  })
+
+  const onChangeInputValue = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      const { id, value } = e.target
+      setUser({ ...user, [id]: value })
+      const regexp = getValidation(id as keyof Omit<UserParam, 'passwordCheck'>, value)
+      setValidation({ ...validation, [id]: regexp })
+    },
+    [user.email, user.password],
+  )
+
+  const onClickSignIn = () => {
+    navigate('./todo')
+  }
 
   const onClickSignUp = useCallback(() => navigate('./signup'), [])
+
+  const isValidation = useMemo(
+    () => !(validation.email && validation.password),
+    [validation.email, validation.password],
+  )
 
   return (
     <Container>
       <Title>로그인</Title>
-      <AuthInput label="Email" id="email" type="email" />
-      <AuthInput label="Password" id="password" type="password" />
-      <SignInButton>Sign In</SignInButton>
+      <AuthInput label="Email" id="email" type="email" value={user.email} onChange={onChangeInputValue} />
+      <AuthInput label="Password" id="password" type="password" value={user.password} onChange={onChangeInputValue} />
+      <SignInButton disabled={isValidation} onClick={onClickSignIn}>
+        Sign In
+      </SignInButton>
       <SignUpContainer>
         계정이 없으시다면 <SignUpLink onClick={onClickSignUp}>회원가입</SignUpLink>을 먼저 진행해주세요.
       </SignUpContainer>

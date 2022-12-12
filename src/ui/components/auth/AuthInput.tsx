@@ -1,14 +1,22 @@
+import { ChangeEvent } from 'react'
 import styled from 'styled-components'
 
 interface Props {
   label: string
   id: string
-  type: 'email' | 'password' | 'text'
+  type: 'email' | 'password' | 'passwordCheck'
+  value: string
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void
+  error?: {
+    isError: boolean
+    message: string
+  }
 }
-const AuthInput = ({ label, id, type }: Props) => (
+const AuthInput = ({ label, id, type, value, onChange, error }: Props) => (
   <Container>
     <InputLabel htmlFor={id}>{label}</InputLabel>
-    <Input id={id} name={id} type={type} />
+    <Input id={id} name={id} type={type} value={value} onChange={onChange} />
+    {value.length > 0 && !error?.isError && <ErrorMessage>{error?.message}</ErrorMessage>}
   </Container>
 )
 
@@ -38,9 +46,16 @@ const Input = styled.input<{ isError?: boolean }>`
   border: 1px solid #f4ead5;
   border-radius: 8px;
   padding: 0 20px;
-  outline: ${(props) => props.isError && '0.5px solid #d21111'};
   background-color: ${(props) => props.isError && '#fff2f5'};
+  outline: ${(props) => props.isError && '0.5px solid #d21111'};
   &:focus-visible {
     outline: ${(props) => (props.isError ? '0.5px solid #d21111' : '0.5px solid #a2cbfdba')};
   }
+`
+
+const ErrorMessage = styled.span`
+  margin-top: 7px;
+  padding-left: 4px;
+  font-size: 12px;
+  color: #d21111;
 `
