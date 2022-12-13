@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { ChangeEvent, memo, useCallback, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { MdOutlineBackspace } from 'react-icons/md'
 import AuthInput from '../components/auth/AuthInput'
 import { UserParam, validationParam } from '../../lib/interface/userInterface'
 import getValidation from '../../lib/utils/getValidation'
@@ -11,6 +12,10 @@ const SignIn = () => {
 
   const [user, setUser] = useState<UserParam>({ email: '', password: '', passwordCheck: '' })
   const [validation, setValidation] = useState<validationParam>({ email: false, password: false, passwordCheck: false })
+
+  const onClickBackSpace = useCallback(() => {
+    navigate('/')
+  }, [])
 
   const onChangeInputValue = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
@@ -34,7 +39,7 @@ const SignIn = () => {
       await signUpAPI(userData)
       navigate('/')
     } catch {
-      alert('존재하는 이메일 입니다.')
+      alert('존재하는 이메일 입니다. 다른 이메일을 사용해 주세요.')
     }
   }, [user, validation])
 
@@ -45,7 +50,13 @@ const SignIn = () => {
 
   return (
     <Container>
-      <Title>회원가입</Title>
+      <Header>
+        <BackSpace>
+          <MdOutlineBackspace size="24px" onClick={onClickBackSpace} />
+        </BackSpace>
+        <Title>회원가입</Title>
+      </Header>
+
       <AuthInput
         label="Email"
         id="email"
@@ -84,6 +95,22 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+`
+const Header = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`
+const BackSpace = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 30px 0px 0px 30px;
+  color: #616264;
+  cursor: pointer;
+  &:hover {
+    color: #7c8265;
+  }
 `
 
 const Title = styled.h1`

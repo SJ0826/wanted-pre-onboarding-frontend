@@ -8,8 +8,8 @@ interface Props {
 const TodoHeader = ({ onClick, today }: Props) => (
   <Container>
     <Title>TO - DO LIST</Title>
-    <LogoutWrapper>
-      <FiLogOut size="25px" onClick={onClick} />
+    <LogoutWrapper onClick={onClick}>
+      로그아웃 <FiLogOut size="25px" />
     </LogoutWrapper>
     <Date>Date: {today}</Date>
   </Container>
@@ -34,6 +34,7 @@ const LogoutWrapper = styled.div`
   position: absolute;
   right: 0;
   margin: 10px;
+  font-size: 15px;
   &:hover {
     cursor: pointer;
   }
