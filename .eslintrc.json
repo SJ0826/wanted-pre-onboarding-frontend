@@ -30,6 +30,8 @@
     "@typescript-eslint/no-explicit-any": "off",
     "import/prefer-default-export": "off",
     "no-alert": "off",
-    "object-shorthand": "off"
+    "object-shorthand": "off",
+    "no-useless-catch": "off",
+    "consistent-return": "off"
   }
 }
