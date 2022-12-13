@@ -44,7 +44,7 @@ const TodoListPage = () => {
 
   const onToggleDone = useCallback(
     async (id: number, todo: string, isCompleted: boolean) => {
-      await doneTodo(id, todo, isCompleted)
+      await updateTodo(id, todo, isCompleted)
       await getTodos()
     },
     [todoList],
@@ -57,6 +57,11 @@ const TodoListPage = () => {
     },
     [todoList],
   )
+
+  const updateEditTodo = async (id: number, todo: string, isCompleted: boolean) => {
+    await updateTodo(id, todo, isCompleted)
+    await getTodos()
+  }
 
   const getTodos = async () => {
     try {
@@ -76,7 +81,7 @@ const TodoListPage = () => {
     }
   }
 
-  const doneTodo = async (id: number, todo: string, isCompleted: boolean) => {
+  const updateTodo = async (id: number, todo: string, isCompleted: boolean) => {
     try {
       const param = {
         todo,
@@ -104,7 +109,12 @@ const TodoListPage = () => {
   return (
     <Container>
       <TodoHeader onClick={onClickLogout} today={dateString} />
-      <TodoList todos={todoList} onToggleDone={onToggleDone} onClickRemove={onClickRemove} />
+      <TodoList
+        todos={todoList}
+        onToggleDone={onToggleDone}
+        onClickRemove={onClickRemove}
+        updateEditTodo={updateEditTodo}
+      />
       <TodoCreate value={inputValue} onChange={onChangeCreateInput} onSubmit={onSubmitTodo} />
     </Container>
   )

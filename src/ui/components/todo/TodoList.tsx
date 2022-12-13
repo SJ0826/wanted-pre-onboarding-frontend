@@ -7,11 +7,18 @@ interface Props {
   todos: TodoParam[]
   onToggleDone: (id: number, todo: string, isCompleted: boolean) => void
   onClickRemove: (id: number) => void
+  updateEditTodo: (id: number, todo: string, isCompleted: boolean) => Promise<void>
 }
-const TodoList = ({ todos, onToggleDone, onClickRemove }: Props) => (
+const TodoList = ({ todos, onToggleDone, onClickRemove, updateEditTodo }: Props) => (
   <Container>
     {todos.map((todo) => (
-      <TodoItem key={todo.id} {...todo} onToggleDone={onToggleDone} onClickRemove={onClickRemove} />
+      <TodoItem
+        key={todo.id}
+        {...todo}
+        onToggleDone={onToggleDone}
+        onClickRemove={onClickRemove}
+        updateEditTodo={updateEditTodo}
+      />
     ))}
   </Container>
 )
