@@ -2,6 +2,7 @@ import { ChangeEvent, FormEvent, useCallback, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import { createTodoAPI } from '../../lib/api/todo/createTodo'
+import { deleteTodoAPI } from '../../lib/api/todo/deleteTodo'
 import { getTodoAPI } from '../../lib/api/todo/getTodos'
 import { upDateTodoAPI } from '../../lib/api/todo/updateTodo'
 import { TodoParam } from '../../lib/interface/todoInterface'
@@ -49,6 +50,14 @@ const TodoListPage = () => {
     [todoList],
   )
 
+  const onClickRemove = useCallback(
+    async (id: number) => {
+      await deleteTodo(id)
+      await getTodos()
+    },
+    [todoList],
+  )
+
   const getTodos = async () => {
     try {
       const data = await getTodoAPI()
@@ -75,7 +84,15 @@ const TodoListPage = () => {
       }
       await upDateTodoAPI(id, param)
     } catch (e) {
-      alert('요정하신 데이터를 처리할 수 없습니다.')
+      alert('요청하신 데이터를 처리할 수 없습니다.')
+    }
+  }
+
+  const deleteTodo = async (id: number) => {
+    try {
+      await deleteTodoAPI(id)
+    } catch (e) {
+      alert('요청하신 데이터를 처리할 수 없습니다.')
     }
   }
 
@@ -87,7 +104,7 @@ const TodoListPage = () => {
   return (
     <Container>
       <TodoHeader onClick={onClickLogout} today={dateString} />
-      <TodoList todos={todoList} onToggleDone={onToggleDone} />
+      <TodoList todos={todoList} onToggleDone={onToggleDone} onClickRemove={onClickRemove} />
       <TodoCreate value={inputValue} onChange={onChangeCreateInput} onSubmit={onSubmitTodo} />
     </Container>
   )

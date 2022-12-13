@@ -49,7 +49,7 @@ const TodoButton = styled.button`
   font-size: 15px;
   margin-left: 10px;
   color: #665a48;
-  background-color: #fff8ea;
+  background-color: #d7c0ae;
   &:hover {
     cursor: pointer;
     background-color: #665a48;

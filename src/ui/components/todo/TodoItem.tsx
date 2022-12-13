@@ -1,17 +1,24 @@
 import { memo } from 'react'
-import { BsCheck } from 'react-icons/bs'
+import { BsCheck, BsTrashFill, BsFillPencilFill } from 'react-icons/bs'
 import styled, { css } from 'styled-components'
 import { TodoParam } from '../../../lib/interface/todoInterface'
 
 interface Props {
   onToggleDone: (id: number, todo: string, isCompleted: boolean) => void
+  onClickRemove: (id: number) => void
 }
-const TodoItem = ({ id, todo, isCompleted, onToggleDone }: Props & TodoParam) => (
+const TodoItem = ({ id, todo, isCompleted, onToggleDone, onClickRemove }: Props & TodoParam) => (
   <Container>
     <CheckSquere isCompleted={isCompleted} onClick={() => onToggleDone(id, todo, !isCompleted)}>
       {isCompleted && <BsCheck size="25px" color="#5F7161" />}
     </CheckSquere>
     <Text isCompleted={isCompleted}>{todo}</Text>
+    <RemoveButton onClick={() => onClickRemove(id)}>
+      <BsTrashFill size="22px" />
+    </RemoveButton>
+    <EditButton>
+      <BsFillPencilFill size="22px" />
+    </EditButton>
   </Container>
 )
 
@@ -48,4 +55,26 @@ const Text = styled.div<{ isCompleted: boolean }>`
       color: #ced4da;
       text-decoration: line-through;
     `}
+`
+
+const RemoveButton = styled.div`
+  position: absolute;
+  margin: 8px 90px 0px 5px;
+  right: 0;
+  cursor: pointer;
+  color: #eee3cb;
+  &:hover {
+    color: #967e76;
+  }
+`
+
+const EditButton = styled.div`
+  position: absolute;
+  margin: 8px 130px 0px 5px;
+  right: 0;
+  cursor: pointer;
+  color: #eee3cb;
+  &:hover {
+    color: #8fc1d4;
+  }
 `

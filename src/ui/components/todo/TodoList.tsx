@@ -6,11 +6,12 @@ import TodoItem from './TodoItem'
 interface Props {
   todos: TodoParam[]
   onToggleDone: (id: number, todo: string, isCompleted: boolean) => void
+  onClickRemove: (id: number) => void
 }
-const TodoList = ({ todos, onToggleDone }: Props) => (
+const TodoList = ({ todos, onToggleDone, onClickRemove }: Props) => (
   <Container>
     {todos.map((todo) => (
-      <TodoItem key={todo.id} {...todo} onToggleDone={onToggleDone} />
+      <TodoItem key={todo.id} {...todo} onToggleDone={onToggleDone} onClickRemove={onClickRemove} />
     ))}
   </Container>
 )
