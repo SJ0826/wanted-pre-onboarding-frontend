@@ -1,15 +1,15 @@
 import styled from 'styled-components'
+import { FiLogOut } from 'react-icons/fi'
 
 interface Props {
   onClick: () => void
 }
 const TodoHeader = ({ onClick }: Props) => (
   <Container>
-    <Title>
-      TO - DO <pre />
-      LIST
-    </Title>
-    <LogoutButton onClick={onClick}>로그아웃</LogoutButton>
+    <Title>TO - DO LIST</Title>
+    <LogoutWrapper>
+      <FiLogOut size="25px" onClick={onClick} />
+    </LogoutWrapper>
   </Container>
 )
 
@@ -18,25 +18,20 @@ export default TodoHeader
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: #665a48;
-  box-shadow: 1px 1px 1px 1px #999;
-  width: 24%;
+  width: 620x;
 `
 
 const Title = styled.h1`
-  color: #fffbe9;
-  margin-top: 80px;
-  margin-left: 8px;
+  margin-top: 45px;
 `
 
-const LogoutButton = styled.button`
+const LogoutWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  font-weight: 25px;
   position: absolute;
-  width: 120px;
-  height: 40px;
-  margin-left: 27px;
-  bottom: 20px;
-  border: none;
-  border-radius: 20px;
+  right: 0;
+  margin: 10px;
   &:hover {
     cursor: pointer;
   }

@@ -1,14 +1,19 @@
-import { useEffect } from 'react'
+import { ChangeEvent, FormEvent, useCallback, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
+import TodoCreate from '../components/todo/TodoCreate'
 import TodoHeader from '../components/todo/TodoHeader'
 
 const TodoList = () => {
   const navigate = useNavigate()
-  const onClickLogout = () => {
+
+  const [inputValue, setInputValue] = useState('')
+  const [todoList, setTodoList] = useState([])
+
+  const onClickLogout = useCallback(() => {
     localStorage.removeItem('token')
     navigate('/')
-  }
+  }, [])
 
   useEffect(() => {
     if (!localStorage.getItem('token')) navigate('/')
@@ -16,7 +21,7 @@ const TodoList = () => {
   return (
     <Container>
       <TodoHeader onClick={onClickLogout} />
-      <TodoContainer></TodoContainer>
+      <TodoCreate />
     </Container>
   )
 }
@@ -25,14 +30,10 @@ export default TodoList
 
 const Container = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
   height: 100vh;
   max-height: 620px;
-  background-color: #e5d9b6;
-`
-
-const TodoContainer = styled.div`
-  display: flex;
-  flex-direction: column;
+  background-color: #fffbe9;
 `
