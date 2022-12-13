@@ -1,6 +1,6 @@
 import { client } from '../client'
 
-export const createTodoAPI = async (params: { text: string }) => {
+export const createTodoAPI = async (params: { todo: string }) => {
   try {
     const url = '/todos'
     const userToken = localStorage.getItem('token')

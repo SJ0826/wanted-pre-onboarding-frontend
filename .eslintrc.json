@@ -33,5 +33,6 @@
     "object-shorthand": "off",
     "no-useless-catch": "off",
     "consistent-return": "off"
+    
   }
 }

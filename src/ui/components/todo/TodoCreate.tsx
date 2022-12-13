@@ -1,10 +1,16 @@
 import { ChangeEvent, FormEvent } from 'react'
 import styled from 'styled-components'
 
-const TodoCreate = () => (
+interface Props {
+  value: string
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void
+  onSubmit: (e: FormEvent<HTMLFormElement>) => void
+}
+
+const TodoCreate = ({ value, onChange, onSubmit }: Props) => (
   <Container>
-    <TodoForm>
-      <TodoInput placeholder="할 일을 입력해주세요" />
+    <TodoForm onSubmit={onSubmit}>
+      <TodoInput autoFocus placeholder="할 일을 입력해주세요" value={value} onChange={onChange} />
       <TodoButton type="submit">추가</TodoButton>
     </TodoForm>
   </Container>
