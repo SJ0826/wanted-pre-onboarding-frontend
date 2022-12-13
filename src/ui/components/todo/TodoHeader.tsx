@@ -2,14 +2,16 @@ import styled from 'styled-components'
 import { FiLogOut } from 'react-icons/fi'
 
 interface Props {
+  today: string
   onClick: () => void
 }
-const TodoHeader = ({ onClick }: Props) => (
+const TodoHeader = ({ onClick, today }: Props) => (
   <Container>
     <Title>TO - DO LIST</Title>
     <LogoutWrapper>
       <FiLogOut size="25px" onClick={onClick} />
     </LogoutWrapper>
+    <Date>Date: {today}</Date>
   </Container>
 )
 
@@ -35,4 +37,12 @@ const LogoutWrapper = styled.div`
   &:hover {
     cursor: pointer;
   }
+`
+
+const Date = styled.div`
+  position: absolute;
+  right: 0;
+  margin-top: 100px;
+  margin-right: 30px;
+  text-decoration: underline;
 `

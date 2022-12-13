@@ -21,4 +21,5 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 500px;
+  margin-top: 40px;
 `

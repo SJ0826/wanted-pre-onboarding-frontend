@@ -5,6 +5,7 @@ import { createTodoAPI } from '../../lib/api/todo/createTodo'
 import { getTodoAPI } from '../../lib/api/todo/getTodos'
 import { upDateTodoAPI } from '../../lib/api/todo/updateTodo'
 import { TodoParam } from '../../lib/interface/todoInterface'
+import getDateString from '../../lib/utils/getDate'
 import TodoCreate from '../components/todo/TodoCreate'
 import TodoHeader from '../components/todo/TodoHeader'
 import TodoList from '../components/todo/TodoList'
@@ -14,6 +15,8 @@ const TodoListPage = () => {
 
   const [inputValue, setInputValue] = useState('')
   const [todoList, setTodoList] = useState<TodoParam[]>([])
+
+  const { dateString } = getDateString()
 
   const onClickLogout = useCallback(() => {
     localStorage.removeItem('token')
@@ -83,7 +86,7 @@ const TodoListPage = () => {
 
   return (
     <Container>
-      <TodoHeader onClick={onClickLogout} />
+      <TodoHeader onClick={onClickLogout} today={dateString} />
       <TodoList todos={todoList} onToggleDone={onToggleDone} />
       <TodoCreate value={inputValue} onChange={onChangeCreateInput} onSubmit={onSubmitTodo} />
     </Container>
