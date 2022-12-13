@@ -1,9 +1,11 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import styled from 'styled-components'
+import TodoHeader from '../components/todo/TodoHeader'
 
 const TodoList = () => {
   const navigate = useNavigate()
-  const onClickHandler = () => {
+  const onClickLogout = () => {
     localStorage.removeItem('token')
     navigate('/')
   }
@@ -11,7 +13,26 @@ const TodoList = () => {
   useEffect(() => {
     if (!localStorage.getItem('token')) navigate('/')
   }, [])
-  return <button onClick={onClickHandler}>로그아웃</button>
+  return (
+    <Container>
+      <TodoHeader onClick={onClickLogout} />
+      <TodoContainer></TodoContainer>
+    </Container>
+  )
 }
 
 export default TodoList
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100vh;
+  max-height: 620px;
+  background-color: #e5d9b6;
+`
+
+const TodoContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`
