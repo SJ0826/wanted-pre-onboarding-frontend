@@ -1,7 +1,9 @@
 # wanted-pre-onboarding-frontend 선발 과제 :computer:
 
 ## 배포 링크 및 데모 영상
-* 배포 링크 : https://wanted-pre-onboarding-frontend-chi-seven.vercel.app/
+* [배포 링크](https://wanted-pre-onboarding-frontend-dhld.vercel.app/)
+* [데모 영상](https://youtu.be/Toru4eU8tWE)
+
 ## 프로젝트 실행 방법
 1. `git clone https://github.com/SJ0826/wanted-pre-onboarding-frontend.git`
 
