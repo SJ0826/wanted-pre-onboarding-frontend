@@ -28,7 +28,6 @@ const SignIn = () => {
     try {
       const userToken = await signInAPI(user)
       localStorage.setItem('token', userToken.data.access_token)
-      console.log(localStorage)
       alert('로그인 되었습니다')
       navigate('./todo')
     } catch {
