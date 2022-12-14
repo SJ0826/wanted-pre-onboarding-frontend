@@ -32,7 +32,7 @@ const SignIn = () => {
       alert('로그인 되었습니다')
       navigate('./todo')
     } catch {
-      alert('로그인 할 수 없습니다.')
+      alert('존재하는 계정이 아닙니다. 다시 로그인 해주세요.')
     }
   }, [user])
 
