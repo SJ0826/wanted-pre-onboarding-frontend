@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent } from 'react'
+import { ChangeEvent, FormEvent, memo } from 'react'
 import styled from 'styled-components'
 
 interface Props {
@@ -15,7 +15,7 @@ const TodoCreate = ({ value, onChange, onSubmit }: Props) => (
     </TodoForm>
   </Container>
 )
-export default TodoCreate
+export default memo(TodoCreate)
 
 const Container = styled.div`
   display: flex;

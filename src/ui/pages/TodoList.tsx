@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useCallback, useEffect, useState } from 'react'
+import { ChangeEvent, FormEvent, memo, useCallback, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import { createTodoAPI } from '../../lib/api/todo/createTodo'
@@ -120,7 +120,7 @@ const TodoListPage = () => {
   )
 }
 
-export default TodoListPage
+export default memo(TodoListPage)
 
 const Container = styled.div`
   display: flex;

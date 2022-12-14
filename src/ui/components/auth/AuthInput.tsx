@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react'
+import { ChangeEvent, memo } from 'react'
 import styled from 'styled-components'
 
 interface Props {
@@ -20,7 +20,7 @@ const AuthInput = ({ label, id, type, value, onChange, error }: Props) => (
   </Container>
 )
 
-export default AuthInput
+export default memo(AuthInput)
 
 const Container = styled.div`
   display: flex;

@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { FiLogOut } from 'react-icons/fi'
+import { memo } from 'react'
 
 interface Props {
   today: string
@@ -15,7 +16,7 @@ const TodoHeader = ({ onClick, today }: Props) => (
   </Container>
 )
 
-export default TodoHeader
+export default memo(TodoHeader)
 
 const Container = styled.div`
   display: flex;
